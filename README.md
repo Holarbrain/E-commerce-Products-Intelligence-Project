@@ -74,7 +74,7 @@
 |----------|-------------|
 | Data Storage | CSV files (six relational source tables) |
 | Data Processing | Python, SQL |
-| Analysis | pandas, DuckDB (SQL validation), CTEs, window functions, multi-table joins |
+| Analysis | pandas, MySQL (SQL validation), CTEs, window functions, multi-table joins |
 | Visualization | matplotlib, seaborn, Microsoft Power BI (Power Query, DAX) |
 | Version Control | Git / GitHub |
 | Documentation | Markdown, Word (project report) |
@@ -89,21 +89,20 @@ ecommerce-product-intelligence/
 │
 ├── data/
 │   ├── raw/                  # Original six CSV source tables (users, products, sessions,
-│   │                         #   interactions, purchases, reviews) - never edited
-│   ├── processed/            # Cleaned tables output from Power Query (*_cleaned)
-│   └── external/             # Reference/lookup data, if any
+│   │                         #   interactions, purchases, reviews) - never edited          
+│   └── processed/            # Cleaned tables output from Python (*_cleaned)
 │
 ├── notebooks/                # Python EDA notebook - funnel construction, revenue/channel/
 │                             #   demographic analysis, dwell-time and rating analysis
 │
-├── queries/                  # SQL scripts (validated in DuckDB)
+├── queries/                  # SQL scripts (validated in MySQL)
 │   ├── exploratory/          # Ad-hoc business queries (revenue by category, top products)
 │   ├── transformations/      # Channel deep-dive scripts (display ad, organic search)
 │   └── final/                # Cart abandonment analysis (CTE-based set-difference query)
 │
 ├── reports/                  # E-Commerce_Project_Report.docx (full narrative write-up)
 │
-├── visuals/                  # Power BI dashboard screenshots (4 pages), ERD diagrams
+├── visuals/                  # Power BI dashboard screenshots (4 pages), ERD diagrams, Other screenshorts
 │
 ├── docs/                     # Data dictionary / schema notes (Section 6 below)
 │
@@ -131,7 +130,7 @@ ecommerce-product-intelligence/
 ```
 
 1. **Source:** Six relational CSV datasets totaling 133,305 rows — `users` (10,000), `products` (1,000), `sessions` (19,315), `interactions` (100,000), `purchases` (1,737), `reviews` (1,253).
-2. **Ingestion:** Loaded into pandas DataFrames for Python analysis; read directly from CSV by DuckDB for SQL validation; imported via Power Query for the Power BI model.
+2. **Ingestion:** Loaded into pandas DataFrames for Python analysis; read directly from CSV by MySQL for SQL validation; imported via Power Query for the Power BI model.
 3. **Cleaning:** No missing values or malformed rows were found in the raw CSVs. In Power Query: removed duplicate records, trimmed/cleaned text fields, standardized text casing (`Text.Proper`) on categorical fields (device_type, referrer_source, category, loyalty_tier), converted date/time columns to proper types, and validated referential integrity before establishing model relationships.
 4. **Transformation:** Datetime parsing applied across all date columns (signup_date, date_added, start_time, timestamp, order_date, review_date) to enable time-series analysis; funnel stages computed as unique user counts joined across interactions, sessions, and purchases; category- and channel-level revenue aggregations built for both SQL and DAX.
 5. **Analysis:** Exploratory statistics and visual EDA in Python (funnel, revenue, channel, demographic, dwell-time, review, and cold-start analysis); structured SQL querying (CTEs, window functions, multi-table joins) for category revenue, top products, referrer conversion, and cart abandonment; 50+ DAX measures built on a star-schema-oriented Power BI model.
@@ -201,7 +200,7 @@ ecommerce-product-intelligence/
 | `unit_price`, `total_amount` | float | Line-item pricing | `61.63`, `123.26` |
 | `order_date` | date | Date of purchase | `2025-02-18` |
 
-> **Row count:** 1,737 line items (1,440 unique orders) · **Key relationship:** joins to `products` via `product_id`; joins to `users`/`sessions` indirectly through `interactions.interaction_id`.
+> **Row count:** 1,737 line items (1,000 unique orders) · **Key relationship:** joins to `products` via `product_id`; joins to `users`/`sessions` indirectly through `interactions.interaction_id`.
 
 ### Dataset / Table: `reviews`
 
