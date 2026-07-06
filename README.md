@@ -8,11 +8,9 @@
 - [x] Exploratory Data Analysis (EDA)
 - [x] SQL Analysis / Querying
 - [x] Dashboard / Data Visualization
-- [ ] Data Pipeline / ETL
-- [ ] Predictive Modelling / Machine Learning
-- [ ] Data Cleaning / Wrangling
+- [x] Data Pipeline / ETL
+- [x] Data Cleaning / Wrangling
 - [x] End-to-End (multiple of the above)
-- [ ] Other: ___________
 
 ---
 
