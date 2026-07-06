@@ -95,6 +95,8 @@ ecommerce-product-intelligence/
 ├── notebooks/                # Python EDA notebook - funnel construction, revenue/channel/
 │                             #   demographic analysis, dwell-time and rating analysis
 │
+├── power bi/                     # Data dictionary / schema notes (Section 6 below)                           
+│
 ├── queries/                  # SQL scripts (validated in MySQL)
 │   ├── exploratory/          # Ad-hoc business queries (revenue by category, top products)
 │   ├── transformations/      # Channel deep-dive scripts (display ad, organic search)
@@ -104,7 +106,6 @@ ecommerce-product-intelligence/
 │
 ├── visuals/                  # Power BI dashboard screenshots (4 pages), ERD diagrams, Other screenshorts
 │
-├── docs/                     # Data dictionary / schema notes (Section 6 below)
 │
 └── README.md                 # You are here
 ```
